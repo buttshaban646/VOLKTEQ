@@ -16,14 +16,12 @@ jobs:
         mkdir sfdx-cli
         tar xJf sfdx-linux-amd64.tar.xz -C sfdx-cli --strip-components 1
         ./sfdx-cli/install
-    - name: prepare_authenticate
+    - name: 'Populate auth file with SFDX_URL secret of integration org'
       shell: bash
       run: |
-        echo ${{ secrets.SFDC_DEV_AUTH_URL }} > ./SFDC_DEV_AUTH_URL.txt
-    - name: authenticate_to_production
-      # original repo forcedotcom/salesforcedx-actions@master
-      uses: marcelblijleven/salesforcedx-actions@master
-      with:
-        args: force:auth:sfdxurl:store --sfdx-url-file=./SFDC_DEV_AUTH_URL.txt --alias=develop
+            echo ${{ secrets.SFDC_DEV_AUTH_URL}} > ./SFDC_DEV_AUTH_URL.txt
+    - name: Authenticate with Salesforce
+      run: |
+         sfdx auth:sfdxurl:store -f ./SFDC_DEV_AUTH_URL.txt -s -a integration
     - name: Run Apex tests
       run: sfdx force:apex:test:run -l RunLocalTests -w 10
