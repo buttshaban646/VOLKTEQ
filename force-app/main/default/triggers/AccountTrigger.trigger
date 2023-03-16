@@ -11,4 +11,5 @@ trigger AccountTrigger on Account (after insert) {
     //Account acc = new Account();
     //Account acc = new Account();
     //Account acc = new Account();
+    //Account acc = new Account();
 }
