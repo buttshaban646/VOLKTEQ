@@ -10,4 +10,5 @@ trigger AccountTrigger on Account (after insert) {
     //shabanDevelop
     //Account acc = new Account();
     //Account acc = new Account();
+    //Account acc = new Account();
 }
