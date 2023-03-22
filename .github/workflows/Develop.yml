@@ -8,14 +8,9 @@ jobs:
   run-tests:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-    - name: Install Salesforce CLI
-      run: |
-        wget https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz
-        mkdir sfdx-cli
-        tar xJf sfdx-linux-amd64.tar.xz -C sfdx-cli --strip-components 1
-        ./sfdx-cli/install
+    - uses: actions/checkout@v2
+    - run: |
+        git fetch --prune --unshallow
     - name: 'Populate auth file with SFDX_URL secret of integration org'
       shell: bash
       run: |
